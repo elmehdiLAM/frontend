@@ -1,0 +1,26 @@
+{%  extends "base.html" %}
+
+
+{%  block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter benificier </title>
+</head>
+<body>
+    <br><br><br>
+    <h1 style="color: orangered"> ajouter un Beneficier</h1>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit"> Ajouter</button>
+    </form>
+</body>
+</html>
+{% endblock %}

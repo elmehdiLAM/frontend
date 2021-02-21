@@ -1,0 +1,21 @@
+{%  extends "base.html" %}
+
+
+{%  block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Deplacement </title>
+</head>
+<body>
+    <h1 style="color: steelblue"> modifier un Deplacement </h1>
+    <h4>{{ error }}</h4>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit"> modifier </button>
+    </form>
+</body>
+</html>
+{% endblock %}

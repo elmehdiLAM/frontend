@@ -1,0 +1,95 @@
+{%  extends "base.html" %}
+
+
+{%  block content %}
+
+<h1 style="color: steelblue">{{ profil.CIN }}</h1>
+<h1 style="color: steelblue">{{ profil.nom }}</h1>
+<h1 style="color: steelblue">{{ profil.prenom }}</h1>
+<h1 style="color: steelblue">{{ profil.statue }}</h1>
+
+<a href="{% url 'addCours' profil.CIN %}">ajouter cours</a>
+<a href="{% url 'addDeplacement' profil.CIN %}">ajouter deplacement</a>
+<a href="{% url 'etatSommes' profil.CIN %}">Etat des sommes</a>
+
+{% if deplacements|length != 0  %}
+    <h2 style="color: steelblue"> Deplacement </h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Evenement</th>
+          <th scope="col">Date Depart</th>
+          <th scope="col">Date Retour</th>
+          <th scope="col"> </th>
+          <th scope="col"> </th>
+          <th scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for dep in  deplacements %}
+        <tr>
+          <td>{{ dep.evenement }}</td>
+          <td>{{ dep.date_depart }}</td>
+          <td>{{ dep.date_retour }}</td>
+          <td>
+                 <button type="submit" class="btn btn-info">info</button>
+          </td>
+          <td>
+              <form method="get" action="{% url 'updateDeplacemenet'  dep.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">modifier</button>
+            </form>
+          </td>
+          <td>
+              <form method="post" action="{% url 'removeDeplacement' dep.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">supprimer</button>
+              </form>
+          </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endif %}
+{% if cours|length != 0  %}
+    <h2 style="color: steelblue"> Cours </h2>
+
+        <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Module</th>
+          <th scope="col">Etablissement</th>
+          <th scope="col">Date</th>
+          <th scope="col"> </th>
+          <th scope="col"> </th>
+          <th scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for c in  cours %}
+        <tr>
+          <td>{{ c.module}}</td>
+          <td>{{ c.etablisement}}</td>
+          <td>{{c.date }}</td>
+          <td>
+                 <button type="submit" class="btn btn-info">info</button>
+          </td>
+          <td>
+              <form method="get" action="{% url 'updateCours'  c.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">modifier</button>
+            </form>
+          </td>
+          <td>
+              <form method="post" action="{% url 'removeCours' c.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">supprimer</button>
+              </form>
+          </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endif %}
+
+{%  endblock %}

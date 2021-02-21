@@ -1,0 +1,15 @@
+{%  extends "base.html" %}
+
+
+{%  block content %}
+
+    <h1 style="color: orangered"> modifier un cours </h1>
+    <h4>{{ error }}</h4>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit"> modifier </button>
+    </form>
+
+
+{% endblock %}

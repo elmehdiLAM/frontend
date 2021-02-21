@@ -1,0 +1,39 @@
+{%  extends "base.html" %}
+
+{% block content %}
+    <br><br><br><br><br>
+    <h3> Deplacement </h3>
+    <form method="POST" action="{% url 'ficheCours'  CIN %}">
+    {% csrf_token %}
+      <label class="my-1 mr-2" for="event">Evenement</label>
+      <select class="custom-select my-1 mr-sm-2" id="event" name="event">
+        <option selected>choisir...</option>
+        {% for event in events %}
+            <option value={{ event }}> {{ event }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn btn-primary my-1">valider</button>
+    </form>
+
+    <br><br><br>
+    <h3> Cours </h3>
+    <form method="POST" action="{% url 'ficheCours' CIN %}" >
+    {% csrf_token %}
+      <label class="my-1 mr-2" for="year" >Année </label>
+      <select class="custom-select my-1 mr-sm-2" id="year" name="year">
+        <option selected>choisir...</option>
+        {% for year in years %}
+            <option value={{ year }}> {{ year }}</option>
+        {% endfor %}
+      </select>
+      <label class="my-1 mr-2" for="module" >Module </label>
+      <select class="custom-select my-1 mr-sm-2" id="module" name="module">
+        <option selected>choisir...</option>
+        {% for module in moduls %}
+            <option value={{ module }}> {{ module }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn btn-primary my-1">valider</button>
+    </form>
+
+{%  endblock %}
